@@ -9,6 +9,7 @@ oauthlib
 openai
 pdfminer
 psycopg2
+PyPDF2
 pyjwt
 requests
 trafilatura
