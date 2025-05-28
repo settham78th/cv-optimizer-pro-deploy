@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pl" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Optimizer Pro - AI-Powered Resume Enhancement</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Professional CV optimization tool with AI-powered analysis">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="CV Optimizer Pro">
+    <meta name="msapplication-TileColor" content="#667eea">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-152x152.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7717241332394444" crossorigin="anonymous"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS (Latest) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modern-premium.css') }}">
+    
+    <!-- Additional Performance Optimizations -->
+    <link rel="preload" href="{{ url_for('static', filename='css/modern-premium.css') }}" as="style">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    {% block extra_styles %}{% endblock %}
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="CV Optimizer Pro - profesjonalne narzędzie AI do optymalizacji CV i życiorysów. Zwiększ szanse na pracę o 70% dzięki analizie sztucznej inteligencji, generowaniu listów motywacyjnych i sprawdzaniu kompatybilności ATS.">
+    <meta name="keywords" content="CV, optymalizacja CV, AI, sztuczna inteligencja, kariera, praca, rekrutacja, życiorys, list motywacyjny, ATS, generator CV, analiza CV, poprawa CV">
+    <meta name="author" content="CV Optimizer Pro">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Polish">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://cv-optimizer-pro.replit.app/">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="CV Optimizer Pro - Optymalizacja CV z AI">
+    <meta property="og:description" content="Profesjonalne narzędzie AI do optymalizacji CV i zwiększenia szans na wymarzoną pracę">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.png', _external=True) }}">
+</head>
+<body>
+    <!-- Modern Navigation -->
+    <header class="modern-header">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand modern-brand" href="/">
+                    <div class="brand-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <span class="brand-text">CV Optimizer Pro</span>
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        {% if current_user.is_authenticated %}
+                            <!-- Główne funkcje -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('index') }}">
+                                    <i class="fas fa-home me-1"></i>Strona główna
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('cv_generator') }}">
+                                    <i class="fas fa-magic me-1"></i>Stwórz CV
+                                </a>
+                            </li>
+                            {% if current_user.is_premium_active() %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('premium_dashboard') }}">
+                                    <i class="fas fa-crown me-1"></i>Dashboard Premium
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('payment_options') }}">
+                                    <i class="fas fa-credit-card me-1"></i>Płatności
+                                </a>
+                            </li>
+                            
+                            <!-- Menu użytkownika -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle me-1"></i>{{ current_user.get_full_name() or current_user.username }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ url_for('profile') }}">
+                                        <i class="fas fa-user me-2"></i>Mój profil
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('edit_profile') }}">
+                                        <i class="fas fa-edit me-2"></i>Edytuj profil
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('change_password') }}">
+                                        <i class="fas fa-key me-2"></i>Zmień hasło
+                                    </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('logout') }}">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Wyloguj się
+                                    </a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <!-- Dla niezalogowanych -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('index') }}">
+                                    <i class="fas fa-home me-1"></i>Strona główna
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('login') }}">
+                                    <i class="fas fa-sign-in-alt me-1"></i>Zaloguj się
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-light ms-2" href="{{ url_for('register') }}">
+                                    <i class="fas fa-user-plus me-1"></i>Zarejestruj się
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else ('warning' if category == 'warning' else ('success' if category == 'success' else 'info')) }} alert-dismissible fade show" role="alert">
+                        <div class="flash-content">
+                            <i class="fas fa-{{ 'exclamation-triangle' if category == 'error' else ('exclamation-circle' if category == 'warning' else ('check-circle' if category == 'success' else 'info-circle')) }} me-2"></i>
+                            {{ message }}
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content with proper spacing for fixed nav -->
+    <main class="container-fluid main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Modern Footer -->
+    <footer class="modern-footer">
+        <div class="footer-background"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-brand">
+                        <h5 class="footer-title">
+                            <i class="fas fa-rocket me-2"></i>CV Optimizer Pro
+                        </h5>
+                        <p class="footer-description">
+                            Nowoczesne narzędzie AI do optymalizacji CV, które pomoże Ci znaleźć wymarzoną pracę.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-links">
+                        <p class="powered-by">
+                            Zasilane przez 
+                            <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="footer-link">
+                                <i class="fas fa-brain me-1"></i>OpenRouter AI
+                            </a>
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-link" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        <div class="footer-menu mb-2">
+                            <a href="{{ url_for('about') }}" class="footer-link me-3">O nas</a>
+                            <a href="{{ url_for('privacy') }}" class="footer-link me-3">Polityka Prywatności</a>
+                            <a href="mailto:kontakt@cvoptimizer.pro" class="footer-link">Kontakt</a>
+                        </div>
+                        <p class="copyright">
+                            &copy; 2024 CV Optimizer Pro. Wszystkie prawa zastrzeżone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

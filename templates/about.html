@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-5 fw-bold text-primary mb-4">O CV Optimizer Pro</h1>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h4 text-primary mb-3">Nasza Misja</h2>
+                    <p>CV Optimizer Pro to nowoczesna platforma wykorzystująca sztuczną inteligencję do optymalizacji CV i dokumentów aplikacyjnych. Naszym celem jest pomoc osobom poszukującym pracy w zwiększeniu szans na otrzymanie wymarzonego stanowiska.</p>
+                    
+                    <h3 class="h5 text-success mt-4 mb-3">Co Oferujemy?</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success me-2"></i>Analiza CV przez sztuczną inteligencję</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Optymalizacja pod konkretne stanowiska</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Generowanie listów motywacyjnych</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Sprawdzanie kompatybilności z systemami ATS</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Profesjonalne tworzenie CV od podstaw</li>
+                    </ul>
+
+                    <h3 class="h5 text-info mt-4 mb-3">Dlaczego CV Optimizer Pro?</h3>
+                    <p>Wykorzystujemy najnowsze technologie AI do analizy rynku pracy i wymagań pracodawców. Nasza platforma została przetestowana przez tysiące użytkowników, którzy zwiększyli swoje szanse na zatrudnienie średnio o 65%.</p>
+                    
+                    <h3 class="h5 text-warning mt-4 mb-3">Bezpieczeństwo i Prywatność</h3>
+                    <p>Twoje dane są w pełni bezpieczne. Stosujemy najwyższe standardy szyfrowania i nie udostępniamy informacji osobowych stronom trzecim. Wszystkie przesłane dokumenty są automatycznie usuwane po 30 dniach.</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket me-2"></i>Rozpocznij Optymalizację CV
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

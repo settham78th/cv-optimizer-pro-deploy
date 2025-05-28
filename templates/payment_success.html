@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header text-center bg-success text-white">
+                <h3><i class="fas fa-check-circle me-2"></i>Płatność Zakończona Sukcesem!</h3>
+            </div>
+            <div class="card-body text-center">
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>Dziękujemy!</strong> Twoja płatność została przetworzona pomyślnie.
+                </div>
+
+                <h4 class="text-success mb-3">Możesz teraz wygenerować swoje zoptymalizowane CV!</h4>
+                
+                <p class="mb-4">Twój dostęp do funkcji AI został aktywowany. Wróć do głównej strony, aby:</p>
+                
+                <ul class="list-unstyled mb-4">
+                    <li><i class="fas fa-star text-warning me-2"></i>Wygenerować zoptymalizowane CV</li>
+                    <li><i class="fas fa-star text-warning me-2"></i>Otrzymać feedback od AI-recruitera</li>
+                    <li><i class="fas fa-star text-warning me-2"></i>Utworzyć spersonalizowany list motywacyjny</li>
+                    <li><i class="fas fa-star text-warning me-2"></i>Sprawdzić zgodność z systemami ATS</li>
+                    <li><i class="fas fa-star text-warning me-2"></i>Przygotować się do rozmowy kwalifikacyjnej</li>
+                </ul>
+
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-left me-2"></i>Powrót do Optymalizacji CV
+                    </a>
+                </div>
+                
+                <div class="mt-4">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Twój dostęp jest aktywny przez tę sesję przeglądarki
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Automatycznie przekieruj do weryfikacji płatności po załadowaniu strony
+document.addEventListener('DOMContentLoaded', function() {
+    // Pobierz payment_intent z URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentIntentId = urlParams.get('payment_intent');
+    
+    if (paymentIntentId) {
+        // Wyślij żądanie weryfikacji płatności
+        fetch('/verify-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                payment_intent_id: paymentIntentId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Płatność zweryfikowana pomyślnie');
+            } else {
+                console.error('Błąd weryfikacji płatności:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Błąd podczas weryfikacji płatności:', error);
+        });
+    }
+});
+</script>
+{% endblock %}

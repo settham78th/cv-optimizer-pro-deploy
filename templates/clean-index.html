@@ -1,0 +1,664 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    /* Hero Section Styles */
+    .hero-section {
+        min-height: 70vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-top: -80px;
+        padding-top: 100px;
+    }
+
+    .hero-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+            rgba(102, 126, 234, 0.9) 0%, 
+            rgba(118, 75, 162, 0.9) 50%,
+            rgba(255, 94, 77, 0.8) 100%);
+        z-index: 1;
+    }
+
+    .hero-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
+            radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 2px);
+        background-size: 50px 50px;
+        z-index: 2;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        color: white;
+    }
+
+    .hero-icon {
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-title {
+        font-size: 3.8rem;
+        font-weight: 800;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        line-height: 1.2;
+    }
+
+    .ai-badge {
+        display: inline-block;
+        background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-left: 15px;
+        box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+        animation: pulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4); }
+        to { box-shadow: 0 6px 25px rgba(0, 210, 255, 0.6); }
+    }
+
+    .hero-subtitle {
+        font-size: 1.4rem;
+        font-weight: 300;
+        opacity: 0.95;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 25px 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        min-width: 160px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-item:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-number {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        text-shadow: 
+            0 0 10px rgba(0, 0, 0, 0.8),
+            0 0 20px rgba(0, 0, 0, 0.6),
+            2px 2px 4px rgba(0, 0, 0, 0.9);
+        margin-bottom: 8px;
+        text-stroke: 1px rgba(0, 0, 0, 0.5);
+        -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-label {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 
+            0 0 8px rgba(0, 0, 0, 0.8),
+            0 0 15px rgba(0, 0, 0, 0.6),
+            1px 1px 3px rgba(0, 0, 0, 0.9);
+        opacity: 1;
+        margin-top: 5px;
+        -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .cta-primary {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .cta-primary:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+    }
+
+    .cta-secondary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .cta-secondary:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .hero-wave {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        z-index: 3;
+    }
+
+    .hero-wave svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 60px;
+        fill: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        
+        .ai-badge {
+            display: block;
+            margin: 15px auto 0;
+            width: fit-content;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .stat-item {
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+<script src="{{ url_for('static', filename='js/clean-main.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0 mb-4">
+    <!-- Modern Hero Section -->
+    <div class="hero-section position-relative overflow-hidden">
+        <div class="hero-gradient"></div>
+        <div class="hero-pattern"></div>
+        <div class="container py-5">
+            <div class="row align-items-center min-vh-50">
+                <div class="col-lg-10 mx-auto text-center">
+                    <div class="hero-content">
+                        <div class="hero-icon mb-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h1 class="hero-title mb-3">
+                            CV Optimizer Pro
+                            <span class="ai-badge">
+                                <i class="fas fa-robot"></i>
+                                AI Powered
+                            </span>
+                        </h1>
+                        <p class="hero-subtitle mb-4">
+                            Optymalizuj swoje CV za pomocą sztucznej inteligencji i zwiększ szanse na otrzymanie wymarzonej pracy o nawet 70%
+                        </p>
+                        
+
+                        
+                        <div class="cta-buttons">
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('payment_options') }}" class="cta-primary">
+                                    <i class="fas fa-rocket me-2"></i>Wybierz plan
+                                </a>
+                                <a href="#upload-section" class="cta-secondary">
+                                    <i class="fas fa-chart-bar me-2"></i>Przeanalizuj CV
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('register') }}" class="cta-primary">
+                                    <i class="fas fa-user-plus me-2"></i>Dołącz za darmo
+                                </a>
+                                <a href="{{ url_for('login') }}" class="cta-secondary">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Zaloguj się
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics section -->
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 text-primary mb-3 text-center">Wyniki naszej platformy</h2>
+                    <p class="text-muted text-center mb-4">Dołącz do tysięcy zadowolonych użytkowników którzy zwiększyli swoje szanse na otrzymanie wymarzonej pracy</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4 text-center mb-3">
+                            <div class="display-4 fw-bold text-success mb-2">5,000+</div>
+                            <h5 class="text-dark">Zadowolonych użytkowników</h5>
+                            <p class="small text-muted">Którzy znaleźli lepszą pracę</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <div class="display-4 fw-bold text-primary mb-2">70%</div>
+                            <h5 class="text-dark">Zwiększenie szans na pracę</h5>
+                            <p class="small text-muted">Średni wzrost odpowiedzi na aplikacje</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <div class="display-4 fw-bold text-warning mb-2">8</div>
+                            <h5 class="text-dark">Rodzajów analiz AI</h5>
+                            <p class="small text-muted">Kompleksowa optymalizacja CV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it works section -->
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 text-primary mb-3 text-center">Jak działa CV Optimizer Pro?</h2>
+                    <p class="text-muted text-center mb-4">Nasza platforma wykorzystuje zaawansowaną sztuczną inteligencję do analizy i optymalizacji Twojego CV.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4 text-center mb-3">
+                            <i class="fas fa-upload fa-2x text-primary mb-2"></i>
+                            <h5>1. Prześlij CV</h5>
+                            <p class="small text-muted">Wgraj swoje CV w formacie PDF</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <i class="fas fa-brain fa-2x text-success mb-2"></i>
+                            <h5>2. AI Analiza</h5>
+                            <p class="small text-muted">Sztuczna inteligencja analizuje Twoje CV</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <i class="fas fa-rocket fa-2x text-warning mb-2"></i>
+                            <h5>3. Pobierz Wyniki</h5>
+                            <p class="small text-muted">Otrzymaj zoptymalizowane CV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mt-5">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                    <h4>Zwiększ Skuteczność</h4>
+                    <p class="text-muted">Nasze narzędzie AI analizuje trendy rynku pracy i dopasowuje Twoje CV do aktualnych wymagań pracodawców.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                    <h4>Bezpieczeństwo Danych</h4>
+                    <p class="text-muted">Twoje CV jest w pełni bezpieczne. Stosujemy szyfrowanie SSL i automatycznie usuwamy dokumenty po 30 dniach.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x text-warning mb-3"></i>
+                    <h4>Tysiące Zadowolonych</h4>
+                    <p class="text-muted">Już ponad 5000 osób skorzystało z naszej platformy i znalazło lepszą pracę dzięki zoptymalizowanym CV.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="upload-section">
+
+    {% if not current_user.is_authenticated %}
+    <div class="alert alert-info" role="alert">
+        <h5><i class="fas fa-info-circle me-2"></i>Zaloguj się, aby korzystać z aplikacji</h5>
+        <p class="mb-2">Potrzebujesz konta, aby przesłać CV i skorzystać z optymalizacji AI.</p>
+        <a href="{{ url_for('login') }}" class="btn btn-primary me-2">Zaloguj się</a>
+        <a href="{{ url_for('register') }}" class="btn btn-outline-primary">Utwórz konto</a>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <!-- Lewa kolumna: Upload i ustawienia -->
+        <div class="col-lg-6">
+            <!-- Upload CV -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-upload me-2"></i>Prześlij CV</h5>
+                </div>
+                <div class="card-body">
+                    <form id="cv-upload-form" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="cv-file" class="form-label">Wybierz plik PDF</label>
+                            <input type="file" class="form-control" id="cv-file" name="cv_file" accept=".pdf" required>
+                            <div class="form-text">Tylko pliki PDF są akceptowane.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-upload me-2"></i>Prześlij CV
+                        </button>
+                    </form>
+                    
+                    <div id="upload-success" class="alert alert-success mt-3" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i>CV zostało pomyślnie przesłane!
+                    </div>
+                    
+                    <div id="upload-error" class="alert alert-danger mt-3" style="display: none;">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <span id="error-message">Błąd podczas przesyłania CV</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Język -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="fas fa-globe me-2"></i>Język analizy</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="language" id="lang-pl" value="pl" checked>
+                                <label class="form-check-label" for="lang-pl">
+                                    🇵🇱 Polski
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="language" id="lang-en" value="en">
+                                <label class="form-check-label" for="lang-en">
+                                    🇺🇸 English
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informacje o pracy -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0"><i class="fas fa-briefcase me-2"></i>Informacje o pracy</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="job-title" class="form-label">Stanowisko</label>
+                        <input type="text" class="form-control" id="job-title" placeholder="np. Senior Developer">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="job-description" class="form-label">Opis stanowiska</label>
+                        <textarea class="form-control" id="job-description" rows="4" placeholder="Wklej opis stanowiska..."></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="job-url" class="form-label">Link do oferty (opcjonalnie)</label>
+                        <input type="url" class="form-control" id="job-url" placeholder="https://pracuj.pl/praca/...">
+                        <div class="form-text">Link do oferty pracy dla lepszej analizy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Prawa kolumna: Opcje i wyniki -->
+        <div class="col-lg-6">
+            <!-- Opcje optymalizacji -->
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0"><i class="fas fa-cogs me-2"></i>Opcje optymalizacji</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="optimize" value="optimize" checked>
+                            <label class="form-check-label" for="optimize">
+                                <strong>✨ Optymalizuj CV</strong><br>
+                                <small class="text-muted">Ulepsz CV pod konkretne stanowisko</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="feedback" value="feedback">
+                            <label class="form-check-label" for="feedback">
+                                <strong>📋 Opinia rekrutera</strong><br>
+                                <small class="text-muted">Otrzymaj feedback jak od prawdziwego rekrutera</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="cover_letter" value="cover_letter">
+                            <label class="form-check-label" for="cover_letter">
+                                <strong>📝 List motywacyjny</strong><br>
+                                <small class="text-muted">Wygeneruj spersonalizowany list</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="cv_score" value="cv_score">
+                            <label class="form-check-label" for="cv_score">
+                                <strong>📊 Ocena CV (1-100)</strong><br>
+                                <small class="text-muted">Szczegółowa ocena i rekomendacje</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="ats_check" value="ats_check">
+                            <label class="form-check-label" for="ats_check">
+                                <strong>🤖 Test ATS</strong><br>
+                                <small class="text-muted">Sprawdź kompatybilność z systemami ATS</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="interview_questions" value="interview_questions">
+                            <label class="form-check-label" for="interview_questions">
+                                <strong>❓ Pytania na rozmowę</strong><br>
+                                <small class="text-muted">Przewidywane pytania rekrutacyjne</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="keyword_analysis" value="keyword_analysis">
+                            <label class="form-check-label" for="keyword_analysis">
+                                <strong>🔍 Analiza słów kluczowych</strong><br>
+                                <small class="text-muted">Porównanie z wymaganiami oferty</small>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="optimization-option" id="grammar_check" value="grammar_check">
+                            <label class="form-check-label" for="grammar_check">
+                                <strong>✏️ Sprawdzenie gramatyki</strong><br>
+                                <small class="text-muted">Korekta językowa i stylistyczna</small>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button id="process-button" class="btn btn-success w-100" disabled>
+                        <i class="fas fa-play me-2"></i>Rozpocznij analizę
+                    </button>
+                    
+                    <div id="processing-indicator" class="text-center mt-3" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Ładowanie...</span>
+                        </div>
+                        <p class="mt-2">Analizuję CV za pomocą AI...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wyniki -->
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Wyniki analizy</h6>
+                </div>
+                <div class="card-body">
+                    <!-- Podgląd CV -->
+                    <div id="cv-preview" style="display: none;">
+                        <h6>Podgląd CV:</h6>
+                        <div id="cv-text-display" class="border p-3 bg-light" style="max-height: 200px; overflow-y: auto;"></div>
+                        <button id="edit-cv-btn" class="btn btn-outline-primary btn-sm mt-2" disabled>
+                            <i class="fas fa-edit"></i> Edytuj
+                        </button>
+                    </div>
+
+                    <!-- Edytor CV -->
+                    <div id="cv-editor" style="display: none;">
+                        <h6>Edytuj CV:</h6>
+                        <textarea id="cv-text-editor" class="form-control mb-2" rows="10"></textarea>
+                        <button id="save-cv-btn" class="btn btn-success btn-sm me-2">
+                            <i class="fas fa-save"></i> Zapisz
+                        </button>
+                        <button id="cancel-edit-btn" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-times"></i> Anuluj
+                        </button>
+                    </div>
+
+                    <!-- Kontener wyników -->
+                    <div id="result-container">
+                        <p class="text-muted text-center">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Wyniki analizy pojawią się tutaj
+                        </p>
+                    </div>
+
+                    <!-- Przyciski akcji -->
+                    <div class="mt-3">
+                        <button id="copy-result-btn" class="btn btn-outline-success btn-sm me-2" disabled>
+                            <i class="fas fa-copy"></i> Kopiuj
+                        </button>
+                        <button id="compare-versions-btn" class="btn btn-outline-info btn-sm" disabled>
+                            <i class="fas fa-balance-scale"></i> Porównaj
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    font-weight: 600;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+#result-container {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,397 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced-ui.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Enhanced Hero Section -->
+<div class="hero-section-enhanced floating-element">
+    <div class="hero-icon-enhanced">
+        <i class="fas fa-brain"></i>
+    </div>
+    <h1 class="hero-title-enhanced">CV Optimizer Pro</h1>
+    <p class="hero-subtitle-enhanced">
+        Przekształć swoje CV w potężne narzędzie kariery dzięki zaawansowanej analizie AI
+    </p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="#upload-section" class="btn btn-success-enhanced btn-lg-enhanced">
+            <i class="fas fa-rocket"></i>
+            Zacznij optymalizację
+        </a>
+        {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('register') }}" class="btn btn-primary-enhanced btn-lg-enhanced">
+            <i class="fas fa-user-plus"></i>
+            Utwórz konto
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Enhanced Features Grid -->
+<div class="features-grid-enhanced">
+    <div class="feature-item-enhanced floating-element">
+        <div class="feature-icon-enhanced">
+            <i class="fas fa-upload"></i>
+        </div>
+        <h5>Szybkie przesyłanie</h5>
+        <p>Przeciągnij i upuść swój plik PDF lub wybierz z komputera</p>
+    </div>
+    <div class="feature-item-enhanced floating-element">
+        <div class="feature-icon-enhanced">
+            <i class="fas fa-brain"></i>
+        </div>
+        <h5>Inteligentna analiza</h5>
+        <p>Zaawansowane algorytmy AI analizują każdy aspekt Twojego CV</p>
+    </div>
+    <div class="feature-item-enhanced floating-element">
+        <div class="feature-icon-enhanced">
+            <i class="fas fa-target"></i>
+        </div>
+        <h5>Precyzyjna optymalizacja</h5>
+        <p>Dostosowanie treści do konkretnych wymagań stanowiska</p>
+    </div>
+    <div class="feature-item-enhanced floating-element">
+        <div class="feature-icon-enhanced">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h5>Szczegółowe raporty</h5>
+        <p>Otrzymaj konkretne rekomendacje i ocenę punktową</p>
+    </div>
+</div>
+
+{% if not current_user.is_authenticated %}
+<div class="alert-enhanced alert-info-enhanced">
+    <i class="fas fa-info-circle" style="font-size: 1.5rem;"></i>
+    <div>
+        <h5 class="mb-1">Zaloguj się, aby korzystać z pełnych funkcji</h5>
+        <p class="mb-2">Aby przesłać CV i skorzystać z optymalizacji AI, musisz mieć konto użytkownika.</p>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('login') }}" class="btn btn-primary-enhanced">
+                <i class="fas fa-sign-in-alt"></i>Zaloguj się
+            </a>
+            <a href="{{ url_for('register') }}" class="btn btn-success-enhanced">
+                <i class="fas fa-user-plus"></i>Utwórz konto
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row" id="upload-section">
+    <!-- Enhanced Upload Section -->
+    <div class="col-lg-6">
+        <div class="enhanced-card floating-element mb-4">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-rocket me-2"></i>Prześlij swoje CV</h3>
+            </div>
+            <div class="card-body">
+                <form id="cv-upload-form" enctype="multipart/form-data">
+                    <div class="file-upload-enhanced mb-4">
+                        <input type="file" id="cv-file" name="cv_file" accept=".pdf" required>
+                        <label for="cv-file" class="file-upload-label">
+                            <div class="file-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Przeciągnij plik PDF tutaj</strong>
+                                <br>
+                                <small class="text-muted">lub kliknij, aby wybrać plik</small>
+                            </div>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary-enhanced w-100">
+                        <i class="fas fa-rocket me-2"></i>Prześlij CV
+                    </button>
+                </form>
+                
+                <div id="upload-success" class="alert-enhanced alert-success-enhanced mt-3" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span>CV zostało pomyślnie przesłane!</span>
+                </div>
+                
+                <div id="upload-error" class="alert-enhanced alert-danger-enhanced mt-3" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="error-message">Błąd podczas przesyłania CV</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Language Selector -->
+        <div class="enhanced-card floating-element mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-globe me-2"></i>Język analizy</h5>
+            </div>
+            <div class="card-body">
+                <div class="language-selector-enhanced">
+                    <label class="language-option-enhanced active">
+                        <input type="radio" name="language" value="pl" checked style="display: none;">
+                        <span class="flag">🇵🇱</span>
+                        <span>Polski</span>
+                    </label>
+                    <label class="language-option-enhanced">
+                        <input type="radio" name="language" value="en" style="display: none;">
+                        <span class="flag">🇺🇸</span>
+                        <span>English</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Job Information -->
+        <div class="enhanced-card floating-element mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-briefcase me-2"></i>Informacje o pracy</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="job-title" class="form-label-enhanced">Tytuł stanowiska</label>
+                    <input type="text" class="form-control-enhanced" id="job-title" 
+                           placeholder="np. Senior Software Developer, Marketing Manager">
+                    <small class="text-muted">Wymagane dla optymalizacji pod konkretne stanowisko</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="job-description" class="form-label-enhanced">Opis stanowiska</label>
+                    <textarea class="form-control-enhanced" id="job-description" rows="4" 
+                              placeholder="Wklej tutaj pełny opis stanowiska..."></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="job-url" class="form-label-enhanced">LUB Link do oferty (opcjonalnie)</label>
+                    <input type="url" class="form-control-enhanced" id="job-url" 
+                           placeholder="https://example.com/job-posting">
+                    <small class="text-muted">Automatycznie wyciągniemy szczegóły oferty z obsługiwanych portali</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced Options Section -->
+    <div class="col-lg-6">
+        <div class="enhanced-card floating-element mb-4">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-magic me-2"></i>Opcje optymalizacji AI</h3>
+            </div>
+            <div class="card-body">
+                <div class="option-list-enhanced">
+                    <label class="option-item-enhanced selected">
+                        <input type="radio" name="optimization-option" value="optimize" checked>
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-star text-warning"></i>
+                            Wygeneruj ulepszone CV
+                        </div>
+                        <div class="option-description-enhanced">
+                            Optymalizuj CV pod konkretne stanowisko z wykorzystaniem AI
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="feedback">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-clipboard-check text-primary"></i>
+                            Opinia rekrutera AI
+                        </div>
+                        <div class="option-description-enhanced">
+                            Otrzymaj szczegółową opinię jakby od prawdziwego rekrutera
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="cover_letter">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-file-alt text-success"></i>
+                            Wygeneruj list motywacyjny
+                        </div>
+                        <div class="option-description-enhanced">
+                            Stwórz spersonalizowany list motywacyjny do oferty
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="cv_score">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-chart-bar text-info"></i>
+                            Analiza punktowa CV (1-100)
+                        </div>
+                        <div class="option-description-enhanced">
+                            Otrzymaj szczegółową ocenę i rekomendacje poprawy
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="ats_check">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-robot text-secondary"></i>
+                            Test kompatybilności ATS
+                        </div>
+                        <div class="option-description-enhanced">
+                            Sprawdź jak CV poradzi sobie z systemami ATS
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="interview_questions">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-question-circle text-warning"></i>
+                            Pytania na rozmowę
+                        </div>
+                        <div class="option-description-enhanced">
+                            Wygeneruj potencjalne pytania na podstawie CV
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="keyword_analysis">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-search text-primary"></i>
+                            Analiza słów kluczowych
+                        </div>
+                        <div class="option-description-enhanced">
+                            Porównaj słowa kluczowe z wymaganiami stanowiska
+                        </div>
+                    </label>
+                    
+                    <label class="option-item-enhanced">
+                        <input type="radio" name="optimization-option" value="grammar_check">
+                        <div class="option-title-enhanced">
+                            <i class="fas fa-spell-check text-success"></i>
+                            Sprawdzenie gramatyki i stylu
+                        </div>
+                        <div class="option-description-enhanced">
+                            Profesjonalna analiza języka i stylu pisania
+                        </div>
+                    </label>
+                </div>
+                
+                <button id="process-button" class="btn btn-success-enhanced w-100 mt-4" disabled>
+                    <i class="fas fa-cogs me-2"></i>Uruchom analizę AI
+                </button>
+                
+                <div id="processing-indicator" class="processing-enhanced mt-4" style="display: none;">
+                    <div class="processing-spinner-enhanced"></div>
+                    <h5>Przetwarzanie z użyciem AI...</h5>
+                    <p class="text-muted">To może potrwać do minuty. Proszę czekać.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enhanced Results Section -->
+<div class="row mt-4" id="results-section" style="display: none;">
+    <div class="col-12">
+        <div class="enhanced-card">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-chart-line me-2"></i>Wyniki analizy</h3>
+            </div>
+            <div class="card-body">
+                <!-- CV Preview -->
+                <div id="cv-preview" class="result-container-enhanced mb-4" style="display: none;">
+                    <h5><i class="fas fa-file-alt me-2"></i>Podgląd CV</h5>
+                    <div id="cv-text-display"></div>
+                </div>
+                
+                <!-- CV Editor -->
+                <div id="cv-editor" class="mb-4" style="display: none;">
+                    <h5><i class="fas fa-edit me-2"></i>Edytuj CV</h5>
+                    <textarea id="cv-text-editor" class="form-control-enhanced" rows="15"></textarea>
+                    <div class="mt-3">
+                        <button id="save-cv-btn" class="btn btn-success-enhanced me-2">
+                            <i class="fas fa-save"></i>Zapisz zmiany
+                        </button>
+                        <button id="cancel-edit-btn" class="btn btn-secondary">
+                            <i class="fas fa-times"></i>Anuluj
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Analysis Results -->
+                <div id="result-container" class="result-container-enhanced">
+                    <div class="text-center text-muted">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Wyniki analizy pojawią się tutaj po przetworzeniu CV
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 mt-4">
+                    <button id="edit-cv-btn" class="btn btn-primary-enhanced" disabled>
+                        <i class="fas fa-edit"></i>Edytuj CV
+                    </button>
+                    <button id="copy-result-btn" class="btn btn-success-enhanced" disabled>
+                        <i class="fas fa-copy"></i>Kopiuj wynik
+                    </button>
+                    <button id="compare-versions-btn" class="btn btn-info" disabled>
+                        <i class="fas fa-balance-scale"></i>Porównaj wersje
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enhanced JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced option selection
+    const optionItems = document.querySelectorAll('.option-item-enhanced');
+    optionItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove selected class from all items
+            optionItems.forEach(i => i.classList.remove('selected'));
+            // Add selected class to clicked item
+            this.classList.add('selected');
+            // Check the radio button
+            this.querySelector('input[type="radio"]').checked = true;
+        });
+    });
+    
+    // Enhanced language selection
+    const languageOptions = document.querySelectorAll('.language-option-enhanced');
+    languageOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Remove active class from all options
+            languageOptions.forEach(o => o.classList.remove('active'));
+            // Add active class to clicked option
+            this.classList.add('active');
+            // Check the radio button
+            this.querySelector('input[type="radio"]').checked = true;
+        });
+    });
+    
+    // Enhanced file upload feedback
+    const fileInput = document.getElementById('cv-file');
+    const fileLabel = document.querySelector('.file-upload-label');
+    
+    fileInput.addEventListener('change', function() {
+        if (this.files[0]) {
+            fileLabel.innerHTML = `
+                <div class="file-upload-icon">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                </div>
+                <div>
+                    <strong>${this.files[0].name}</strong>
+                    <br>
+                    <small class="text-success">Plik gotowy do przesłania</small>
+                </div>
+            `;
+            fileLabel.style.borderColor = '#4facfe';
+            fileLabel.style.backgroundColor = 'rgba(79, 172, 254, 0.05)';
+        }
+    });
+    
+    // Show results section when CV is uploaded
+    const uploadForm = document.getElementById('cv-upload-form');
+    if (uploadForm) {
+        uploadForm.addEventListener('submit', function() {
+            setTimeout(() => {
+                document.getElementById('results-section').style.display = 'block';
+                document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        });
+    }
+});
+</script>
+{% endblock %}

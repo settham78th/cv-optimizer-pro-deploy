@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Opcje Płatności - CV Generator{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-dark hero-section">
+            <div class="card-body text-center py-5">
+                <div class="hero-content">
+                    <div class="hero-icon mb-4">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h1 class="hero-title mb-4">Wybierz Swój Plan</h1>
+                    <p class="hero-subtitle mb-4">Profesjonalne CV dopasowane do ofert pracy z zaawansowaną analizą AI</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pricing Cards -->
+<div class="row g-4 mb-5">
+    <div class="col-12 col-lg-6">
+        <div class="card pricing-card h-100 border-primary">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h3 class="mb-0"><i class="fas fa-file-alt me-2"></i>Jednorazowa Optymalizacja</h3>
+            </div>
+            <div class="card-body text-center p-4">
+                <div class="pricing-amount mb-4">
+                    <span class="currency">PLN</span>
+                    <span class="price">9.99</span>
+                </div>
+                <p class="card-text mb-4">Profesjonalna analiza jednego CV</p>
+                
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Analiza i optymalizacja jednego CV
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Sprawdzenie kompatybilności z ATS
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Sugestie poprawek i ulepszeń
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Bezpieczny eksport do PDF
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-4">
+                <button onclick="window.location.href='/checkout'" 
+                        class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-credit-card me-2"></i>Optymalizuj CV Teraz
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+        <div class="card pricing-card h-100 border-warning premium-card">
+            <div class="card-header bg-warning text-dark text-center py-3 position-relative">
+                <div class="position-absolute top-0 start-50 translate-middle">
+                    <span class="badge bg-danger rounded-pill px-3 py-2">
+                        <i class="fas fa-crown me-1"></i>NAJPOPULARNIEJSZY
+                    </span>
+                </div>
+                <h3 class="mb-0 mt-3"><i class="fas fa-star me-2"></i>Subskrypcja Premium</h3>
+            </div>
+            <div class="card-body text-center p-4">
+                <div class="pricing-amount mb-4">
+                    <span class="currency">PLN</span>
+                    <span class="price">29.00</span>
+                    <small class="text-muted d-block">/miesiąc</small>
+                </div>
+                <p class="card-text mb-4">Nieograniczone możliwości AI</p>
+                
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-warning me-2"></i>
+                        Nieograniczona liczba CV
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-warning me-2"></i>
+                        Zaawansowana analiza AI (6000 tokenów)
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-warning me-2"></i>
+                        Dashboard analityczny Premium
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-warning me-2"></i>
+                        Automatyczne listy motywacyjne
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-warning me-2"></i>
+                        Bez znaków wodnych
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-warning me-2"></i>
+                        Wsparcie priorytetowe
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-4">
+                <button onclick="window.location.href='/premium-subscription'" 
+                        class="btn btn-warning btn-lg w-100 text-dark fw-bold">
+                    <i class="fas fa-crown me-2"></i>Zostań Premium
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trust Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center py-4">
+                <p class="mb-3"><i class="fas fa-shield-alt text-success me-2"></i>Bezpieczne płatności obsługiwane przez Stripe</p>
+                <img src="https://stripe.com/img/v3/newsroom/usage/Stripe_wordmark_-_blurple.svg" alt="Stripe" class="img-fluid" style="max-height: 30px; opacity: 0.7;">
+                <p class="text-muted mt-3 mb-0">
+                    <small><i class="fas fa-lock me-1"></i>Wszystkie płatności są szyfrowane i bezpieczne</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-question-circle me-2"></i>Często Zadawane Pytania</h3>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                <i class="fas fa-sync-alt me-2"></i>Czy mogę anulować subskrypcję?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Tak, możesz anulować subskrypcję w każdej chwili. Po anulowaniu zachowasz dostęp do końca opłaconego okresu.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                <i class="fas fa-bolt me-2"></i>Jak szybko otrzymam optymalizowane CV?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Analiza i optymalizacja CV zajmuje zazwyczaj 2-5 minut dzięki zaawansowanej technologii AI.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                <i class="fas fa-shield-alt me-2"></i>Czy moje dane są bezpieczne?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolutnie! Wszystkie dane są szyfrowane i przechowywane zgodnie z najwyższymi standardami bezpieczeństwa.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Subskrypcja Premium - CV Generator{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-dark hero-section">
+            <div class="card-body text-center py-5">
+                <div class="hero-content">
+                    <div class="hero-icon mb-4">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h1 class="hero-title mb-4">Zostań Premium</h1>
+                    <p class="hero-subtitle mb-4">
+                        Odblokuj pełną moc AI w generowaniu profesjonalnych CV. Bez ograniczeń, bez znaków wodnych.
+                    </p>
+                    
+                    <div class="pricing-highlight">
+                        <div class="pricing-card premium-pricing">
+                            <div class="pricing-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="pricing-content">
+                                <h4 class="pricing-title">Premium Unlimited</h4>
+                                <div class="pricing-amount">
+                                    <span class="currency">PLN</span>
+                                    <span class="price">29.00</span>
+                                    <small class="d-block text-muted">/miesiąc</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Premium Features -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h2 class="mb-0"><i class="fas fa-rocket me-2"></i>CV Optimizer Pro Premium</h2>
+            </div>
+            <div class="card-body p-4 p-lg-5">
+                <p class="lead text-center mb-5">
+                    Profesjonalne narzędzie dla ambitnych kandydatów. Nieograniczone możliwości, maksymalne rezultaty.
+                </p>
+                
+                <!-- Features Grid -->
+                <div class="row g-4 mb-5">
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex">
+                            <div class="feature-icon bg-warning text-dark rounded-circle me-3 flex-shrink-0">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-2">Nieograniczona liczba CV</h4>
+                                <p class="text-muted mb-0">Optymalizuj tyle CV ile potrzebujesz, bez żadnych limitów</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex">
+                            <div class="feature-icon bg-warning text-dark rounded-circle me-3 flex-shrink-0">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-2">Zaawansowana analiza AI</h4>
+                                <p class="text-muted mb-0">6000 tokenów dla głębokiej analizy i optymalizacji</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex">
+                            <div class="feature-icon bg-warning text-dark rounded-circle me-3 flex-shrink-0">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-2">Dashboard Premium</h4>
+                                <p class="text-muted mb-0">Szczegółowe statystyki i analiza skuteczności CV</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex">
+                            <div class="feature-icon bg-warning text-dark rounded-circle me-3 flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-2">Listy motywacyjne</h4>
+                                <p class="text-muted mb-0">Automatyczne generowanie dopasowanych listów motywacyjnych</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex">
+                            <div class="feature-icon bg-warning text-dark rounded-circle me-3 flex-shrink-0">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-2">Bez znaków wodnych</h4>
+                                <p class="text-muted mb-0">Czyste, profesjonalne CV gotowe do wysłania</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex">
+                            <div class="feature-icon bg-warning text-dark rounded-circle me-3 flex-shrink-0">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-2">Wsparcie Premium</h4>
+                                <p class="text-muted mb-0">Priorytetowa pomoc techniczna i konsultacje</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="text-center">
+                    <button id="subscribe-premium-btn" 
+                            class="btn btn-warning btn-lg px-5 py-3 fw-bold text-dark">
+                        <i class="fas fa-crown me-2"></i>Aktywuj Premium Teraz
+                    </button>
+                    
+                    <p class="text-muted mt-3 mb-0">
+                        <small>
+                            <i class="fas fa-check me-1"></i>Anuluj w każdej chwili • 
+                            <i class="fas fa-lock me-1"></i>Bezpieczne płatności Stripe • 
+                            <i class="fas fa-bolt me-1"></i>Natychmiastowa aktywacja
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Benefits Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-star me-2"></i>Dlaczego Premium?</h3>
+            </div>
+            <div class="card-body">
+                <div class="row g-4 text-center">
+                    <div class="col-12 col-md-4">
+                        <div class="h2 text-primary mb-3">⚡</div>
+                        <h4 class="fw-bold mb-2">Natychmiastowe rezultaty</h4>
+                        <p class="text-muted">Optymalizacja CV w 2-5 minut z pełną mocą AI</p>
+                    </div>
+                    
+                    <div class="col-12 col-md-4">
+                        <div class="h2 text-success mb-3">🎯</div>
+                        <h4 class="fw-bold mb-2">Więcej ofert pracy</h4>
+                        <p class="text-muted">Użytkownicy Premium otrzymują średnio 3x więcej odpowiedzi</p>
+                    </div>
+                    
+                    <div class="col-12 col-md-4">
+                        <div class="h2 text-warning mb-3">💼</div>
+                        <h4 class="fw-bold mb-2">Profesjonalny wizerunek</h4>
+                        <p class="text-muted">Bez znaków wodnych - gotowe do wysłania</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const subscribeBtn = document.getElementById('subscribe-premium-btn');
+    
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', function() {
+            // Przekieruj do Stripe Checkout dla subskrypcji
+            fetch('/api/create-premium-subscription', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.url) {
+                    // Otwórz Stripe Checkout w tej samej zakładce
+                    console.log('Redirecting to Stripe:', data.url);
+                    window.location.replace(data.url);
+                } else if (data.error) {
+                    alert('Błąd: ' + data.error);
+                } else {
+                    alert('Wystąpił błąd podczas tworzenia subskrypcji');
+                }
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                alert('Wystąpił błąd podczas przetwarzania płatności');
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

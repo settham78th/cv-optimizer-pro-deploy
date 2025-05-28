@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5" id="upload-section">
+    <div class="col-12">
+        <div class="card bg-dark hero-section">
+            <div class="card-body text-center py-5">
+                <div class="hero-content">
+                    <div class="hero-icon mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1 class="hero-title mb-4">CV Optimizer Pro</h1>
+                    <p class="hero-subtitle mb-4">Zmień swoje CV w potężne narzędzie kariery dzięki sztucznej inteligencji</p>
+                    <p class="hero-description mb-4">
+                        Przesyłaj swoje CV i wybieraj spośród zaawansowanych opcji optymalizacji, 
+                        aby zwiększyć swoje szanse na zdobycie wymarzonej pracy.
+                    </p>
+                    
+                    <div class="pricing-highlight">
+                        <div class="pricing-card">
+                            <div class="pricing-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="pricing-content">
+                                <h4 class="pricing-title">Profesjonalna analiza AI</h4>
+                                <div class="pricing-amount">
+                                    <span class="currency">PLN</span>
+                                    <span class="price">9,99</span>
+                                </div>
+                                <p class="pricing-features">
+                                    ✨ Analiza CV przez AI<br>
+                                    🎯 Optymalizacja pod stanowisko<br>
+                                    📊 Ocena i rekomendacje<br>
+                                    💼 List motywacyjny
+                                </p>
+                                <a href="{{ url_for('checkout') }}" class="btn btn-success btn-lg pricing-cta">
+                                    <i class="fas fa-credit-card me-2"></i>Zapłać i optymalizuj CV
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Overview -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h5>Łatwe przesyłanie</h5>
+                <p>Prześlij CV w formacie PDF</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h5>Analiza AI</h5>
+                <p>Zaawansowana analiza przez sztuczną inteligencję</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-target"></i>
+                </div>
+                <h5>Optymalizacja</h5>
+                <p>Dostosowanie do konkretnego stanowiska</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h5>Analiza wyników</h5>
+                <p>Szczegółowe raporty i rekomendacje</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not current_user.is_authenticated %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="alert alert-info border-0" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 15px;">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-3" style="font-size: 1.5rem; color: #667eea;"></i>
+                <div>
+                    <h5 class="mb-1" style="color: #667eea;">Zaloguj się, aby korzystać z pełnych funkcji</h5>
+                    <p class="mb-2">Aby przesłać CV i skorzystać z optymalizacji, musisz mieć konto użytkownika.</p>
+                    <div class="d-flex gap-2">
+                        <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-sign-in-alt me-1"></i>Zaloguj się
+                        </a>
+                        <a href="{{ url_for('register') }}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-user-plus me-1"></i>Utwórz konto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Google AdSense - Top Banner -->
+<div class="text-center mb-4">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7717241332394444"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+<!-- Language Selector -->
+<div class="ultra-modern-card floating-element mb-4">
+    <div class="card-body" style="padding: 1.5rem;">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <h6 class="mb-0"><i class="fas fa-globe me-2"></i>Język analizy AI:</h6>
+            </div>
+            <div class="col-auto">
+                <div class="language-selector">
+                    <input type="radio" id="lang-pl" name="language" value="pl" checked>
+                    <label for="lang-pl" class="language-option">
+                        <span class="flag">🇵🇱</span>
+                        <span>Polski</span>
+                    </label>
+                    <input type="radio" id="lang-en" name="language" value="en">
+                    <label for="lang-en" class="language-option">
+                        <span class="flag">🇺🇸</span>
+                        <span>English</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Left Column: Upload and Job Input -->
+    <div class="col-lg-5">
+        <div class="ultra-modern-card floating-element mb-4">
+            <div class="card-header" style="background: var(--gradient-primary); border: none; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;">
+                <h3 class="mb-0 text-white"><i class="fas fa-rocket me-2"></i>Prześlij swoje CV</h3>
+            </div>
+            <div class="card-body" style="padding: 2rem;">
+                <form id="cv-upload-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="cv-file" class="form-label">Upload CV (PDF format)</label>
+                        <input type="file" class="form-control" id="cv-file" name="cv_file" accept=".pdf" required>
+                        <div class="form-text">Your CV will be processed securely and not stored permanently.</div>
+                    </div>
+                    <button type="submit" class="btn btn-ultra-modern w-100 neon-glow">
+                        <i class="fas fa-rocket me-2"></i>Prześlij CV
+                    </button>
+                </form>
+                
+                <div id="upload-success" class="alert alert-success mt-3" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i> CV uploaded successfully!
+                </div>
+                
+                <div id="upload-error" class="alert alert-danger mt-3" style="display: none;">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span id="error-message">Error uploading CV</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ultra-modern-card floating-element mb-4">
+            <div class="card-header" style="background: var(--gradient-info); border: none; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;">
+                <h3 class="mb-0 text-white"><i class="fas fa-briefcase me-2"></i>Informacje o pracy</h3>
+            </div>
+            <div class="card-body" style="padding: 2rem;">
+                <div class="mb-3">
+                    <label for="job-title" class="form-label">Job Title / Position</label>
+                    <input type="text" class="form-control" id="job-title" placeholder="e.g. Senior Software Developer, Marketing Manager">
+                    <div class="form-text">Required for position-specific optimization</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="job-description" class="form-label">Job Description</label>
+                    <textarea class="form-control" id="job-description" rows="6" placeholder="Paste the full job description here..."></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="job-url" class="form-label">OR Job URL (Optional)</label>
+                    <input type="url" class="form-control" id="job-url" placeholder="https://example.com/job-posting">
+                    <div class="form-text">We'll extract the job details automatically from supported job sites.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ultra-modern-card floating-element mb-4">
+            <div class="card-header" style="background: var(--gradient-success); border: none; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;">
+                <h3 class="mb-0 text-white"><i class="fas fa-magic me-2"></i>Opcje optymalizacji AI</h3>
+            </div>
+            <div class="card-body" style="padding: 2rem;">
+                <div class="list-group">
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="optimize" value="optimize" checked>
+                        <span>
+                            <strong>✅ Generate Improved CV</strong>
+                            <small class="d-block text-body-secondary">Optimize your CV for the target job position</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="feedback" value="feedback">
+                        <span>
+                            <strong>📋 AI Recruiter Feedback</strong>
+                            <small class="d-block text-body-secondary">Get detailed feedback as if from a real recruiter</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="cover_letter" value="cover_letter">
+                        <span>
+                            <strong>📝 Generate Cover Letter</strong>
+                            <small class="d-block text-body-secondary">Create a personalized cover letter for the job</small>
+                        </span>
+                    </label>
+                    
+                    
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="ats_check" value="ats_check">
+                        <span>
+                            <strong>🤖 ATS Compatibility Check</strong>
+                            <small class="d-block text-body-secondary">Analyze how well your CV will perform with ATS systems</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="interview_questions" value="interview_questions">
+                        <span>
+                            <strong>🎯 Generate Interview Questions</strong>
+                            <small class="d-block text-body-secondary">Get potential questions based on your CV</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="cv_score" value="cv_score">
+                        <span>
+                            <strong>📊 CV Score Analysis (1-100)</strong>
+                            <small class="d-block text-body-secondary">Get detailed scoring and improvement recommendations</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="keyword_analysis" value="keyword_analysis">
+                        <span>
+                            <strong>🔍 Keywords Match Analysis</strong>
+                            <small class="d-block text-body-secondary">Compare CV keywords with job requirements</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="grammar_check" value="grammar_check">
+                        <span>
+                            <strong>✏️ Grammar & Style Check</strong>
+                            <small class="d-block text-body-secondary">Professional language and style analysis</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="position_optimization" value="position_optimization">
+                        <span>
+                            <strong>🎯 Position-Specific Optimization</strong>
+                            <small class="d-block text-body-secondary">Tailor CV for specific job title/role</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-2">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="interview_tips" value="interview_tips">
+                        <span>
+                            <strong>💡 Personalized Interview Tips</strong>
+                            <small class="d-block text-body-secondary">Get ready for your interview with custom advice</small>
+                        </span>
+                    </label>
+                </div>
+                
+                
+                
+                <button id="process-button" class="btn btn-success w-100 mt-3" disabled>
+                    <i class="fas fa-cogs me-2"></i>Process CV
+                </button>
+                
+                <div id="processing-indicator" class="text-center mt-3" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Processing your request with AI. This may take up to a minute...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Column: CV Text and Results -->
+    <div class="col-lg-7">
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white">
+                <button class="btn btn-link text-white text-decoration-none p-0 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#cv-text-section" aria-expanded="false" aria-controls="cv-text-section">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0"><i class="fas fa-file-alt me-2"></i>Twój tekst CV</h3>
+                        <div class="d-flex align-items-center">
+                            <button id="edit-cv-btn" class="btn btn-outline-light btn-sm me-2" disabled onclick="event.stopPropagation();">
+                                <i class="fas fa-edit me-1"></i>Edytuj
+                            </button>
+                            <i class="fas fa-chevron-down collapse-icon"></i>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="collapse" id="cv-text-section">
+                <div class="card-body">
+                    <div class="collapse-info mb-3">
+                        <p class="text-muted mb-2">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Tutaj możesz zobaczyć i edytować tekst wyodrębniony z Twojego CV
+                        </p>
+                    </div>
+                    <div id="cv-preview">
+                        <p class="text-muted text-center">Prześlij CV, aby zobaczyć wyodrębniony tekst</p>
+                    </div>
+                    <div id="cv-editor" style="display: none;">
+                        <textarea class="form-control" id="cv-text-editor" rows="15"></textarea>
+                        <div class="d-flex justify-content-end mt-2">
+                            <button id="save-cv-btn" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i>Zapisz zmiany
+                            </button>
+                            <button id="cancel-edit-btn" class="btn btn-outline-secondary ms-2">
+                                <i class="fas fa-times me-1"></i>Anuluj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google AdSense - Middle Section -->
+        <div class="text-center mb-4">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7717241332394444"
+                 data-ad-slot="2345678901"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0"><i class="fas fa-lightbulb me-2"></i>AI Results</h3>
+                <div>
+                    <button id="compare-versions-btn" class="btn btn-outline-light btn-sm me-2" disabled>
+                        <i class="fas fa-columns me-1"></i>Compare
+                    </button>
+                    <button id="copy-result-btn" class="btn btn-outline-light btn-sm" disabled>
+                        <i class="fas fa-copy me-1"></i>Copy
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="result-container">
+                    <p class="text-muted text-center">Process your CV to see AI-generated results here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Google AdSense - Bottom Banner -->
+<div class="text-center my-4">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7717241332394444"
+         data-ad-slot="3456789012"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // The main.js file will handle all the functionality
+</script>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header text-center bg-primary text-white">
+                <h3><i class="fas fa-credit-card me-2"></i>Płatność za Optymalizację CV</h3>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h4 class="text-primary">9,99 PLN</h4>
+                    <p class="text-muted">Jednorazowa płatność za wygenerowanie zoptymalizowanego CV</p>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Co otrzymasz:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>AI-zoptymalizowane CV dostosowane do oferty pracy</li>
+                        <li>Profesjonalne sugestie popraw</li>
+                        <li>Analiza zgodności z systemami ATS</li>
+                        <li>Spersonalizowany list motywacyjny</li>
+                    </ul>
+                </div>
+
+                <!-- Stripe Elements will be inserted here -->
+                <form id="payment-form">
+                    <div id="payment-element">
+                        <!-- Stripe Elements will create form elements here -->
+                    </div>
+                    
+                    <div id="payment-messages" class="alert" style="display: none;">
+                        <!-- Payment status messages will appear here -->
+                    </div>
+                    
+                    <button id="submit-payment" class="btn btn-primary w-100 mt-3">
+                        <span id="button-text">
+                            <i class="fas fa-lock me-2"></i>Zapłać bezpiecznie 9,99 PLN
+                        </span>
+                        <div id="payment-spinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></div>
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        <i class="fas fa-shield-alt me-1"></i>
+                        Płatność jest bezpieczna i szyfrowana przez Stripe
+                    </small>
+                </div>
+                
+                <div class="text-center mt-2">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Powrót do głównej strony
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stripe JavaScript -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+const stripe = Stripe('{{ stripe_public_key }}');
+let elements;
+let clientSecret;
+
+// Initialize payment
+async function initializePayment() {
+    try {
+        // Create payment intent
+        const response = await fetch('/create-payment-intent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (!data.success) {
+            showMessage(data.message, 'danger');
+            return;
+        }
+        
+        clientSecret = data.client_secret;
+        
+        // Initialize Stripe Elements
+        elements = stripe.elements({
+            clientSecret: clientSecret
+        });
+
+        const paymentElementOptions = {
+            layout: "tabs"
+        };
+
+        const paymentElement = elements.create("payment", paymentElementOptions);
+        paymentElement.mount("#payment-element");
+        
+    } catch (error) {
+        console.error('Error initializing payment:', error);
+        showMessage('Błąd podczas inicjalizacji płatności', 'danger');
+    }
+}
+
+// Handle form submission
+document.getElementById('payment-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!stripe || !elements) {
+        return;
+    }
+    
+    setLoading(true);
+    
+    try {
+        const {error} = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: window.location.origin + '/payment-success',
+            },
+        });
+        
+        if (error) {
+            if (error.type === "card_error" || error.type === "validation_error") {
+                showMessage(error.message, 'danger');
+            } else {
+                showMessage("Wystąpił nieoczekiwany błąd.", 'danger');
+            }
+        }
+        
+    } catch (error) {
+        console.error('Payment error:', error);
+        showMessage('Błąd podczas przetwarzania płatności', 'danger');
+    }
+    
+    setLoading(false);
+});
+
+// Helper functions
+function showMessage(messageText, type = 'info') {
+    const messageContainer = document.querySelector("#payment-messages");
+    messageContainer.className = `alert alert-${type}`;
+    messageContainer.textContent = messageText;
+    messageContainer.style.display = 'block';
+    
+    setTimeout(() => {
+        messageContainer.style.display = 'none';
+    }, 5000);
+}
+
+function setLoading(isLoading) {
+    const submitButton = document.querySelector("#submit-payment");
+    const buttonText = document.querySelector("#button-text");
+    const spinner = document.querySelector("#payment-spinner");
+    
+    if (isLoading) {
+        submitButton.disabled = true;
+        buttonText.style.display = 'none';
+        spinner.style.display = 'inline-block';
+    } else {
+        submitButton.disabled = false;
+        buttonText.style.display = 'inline';
+        spinner.style.display = 'none';
+    }
+}
+
+// Initialize payment when page loads
+document.addEventListener('DOMContentLoaded', initializePayment);
+</script>
+{% endblock %}

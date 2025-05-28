@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Subskrypcja Premium Aktywowana - CV Generator{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto text-center">
+        <div class="bg-green-50 border border-green-200 rounded-lg p-8 mb-8">
+            <div class="text-6xl mb-4">🎉</div>
+            <h1 class="text-3xl font-bold text-green-800 mb-4">Gratulacje!</h1>
+            <p class="text-lg text-green-700 mb-6">
+                Twoja subskrypcja Premium została pomyślnie aktywowana!
+            </p>
+            
+            <div class="bg-white border border-green-300 rounded-lg p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Co zyskujesz z Premium:</h2>
+                <ul class="text-left space-y-2 text-gray-700">
+                    <li class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        Nieograniczona liczba CV do optymalizacji
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        Zaawansowane analizy AI z 6000 tokenami
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        Dashboard analityczny Premium
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        Automatyczne generowanie listów motywacyjnych
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        Analiza kompatybilności z systemami ATS
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-500 mr-3">✓</span>
+                        Bez znaków wodnych na CV
+                    </li>
+                </ul>
+            </div>
+
+            {% if current_user.premium_expires_at %}
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
+                <p class="text-purple-800 font-semibold">
+                    📅 Subskrypcja ważna do: {{ current_user.premium_expires_at.strftime('%d.%m.%Y %H:%M') }}
+                </p>
+                <p class="text-purple-600 text-sm mt-1">
+                    (Dokładnie 30 dni od momentu aktywacji)
+                </p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="space-y-4">
+            <a href="{{ url_for('cv_generator') }}" 
+               class="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                🚀 Rozpocznij Generowanie CV
+            </a>
+            
+            <a href="{{ url_for('premium_dashboard') }}" 
+               class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition ml-4">
+                📊 Dashboard Premium
+            </a>
+        </div>
+
+        <div class="mt-8 text-gray-600">
+            <p class="text-sm">
+                Masz pytania? Skontaktuj się z nami: <strong>support@cvoptimizer.pro</strong>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

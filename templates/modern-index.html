@@ -1,0 +1,384 @@
+{% extends "base.html" %}
+
+{% block title %}CV Optimizer Pro - AI-Powered Resume Enhancement{% endblock %}
+
+{% block content %}
+<!-- Modern Hero Section -->
+<div class="premium-card mb-6">
+    <div class="premium-header">
+        <h1><i class="fas fa-rocket me-3"></i>CV Optimizer Pro</h1>
+        <p>Przekształć swoje CV w narzędzie sukcesu dzięki mocy sztucznej inteligencji</p>
+    </div>
+</div>
+
+<!-- Enhanced Statistics Dashboard -->
+{% if current_user.is_authenticated %}
+<div class="premium-card mb-6">
+    <div class="card-body p-6">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-upload text-primary"></i>
+                    </div>
+                    <div class="stat-number">{{ user_stats.total_uploads }}</div>
+                    <div class="stat-label">Przesłanych CV</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="stat-icon">
+                        <i class="fas fa-brain text-success"></i>
+                    </div>
+                    <div class="stat-number">{{ user_stats.total_analyses }}</div>
+                    <div class="stat-label">Analiz AI</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy text-warning"></i>
+                    </div>
+                    <div class="stat-number">{{ user_stats.user_level }}</div>
+                    <div class="stat-label">Poziom</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line text-info"></i>
+                    </div>
+                    <div class="stat-number">{{ user_stats.improvement_score }}%</div>
+                    <div class="stat-label">Poprawa</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Google AdSense - Top Banner -->
+<div class="text-center mb-6">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7717241332394444"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+<!-- Language Selector with Modern Design -->
+<div class="premium-card mb-6">
+    <div class="card-body p-6">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-globe me-2"></i>Język analizy AI:</h6>
+            </div>
+            <div class="col-auto">
+                <div class="language-selector">
+                    <input type="radio" id="lang-pl" name="language" value="pl" checked style="display: none;">
+                    <label for="lang-pl" class="language-option">
+                        <span class="flag">🇵🇱</span>
+                        <span>Polski</span>
+                    </label>
+                    <input type="radio" id="lang-en" name="language" value="en" style="display: none;">
+                    <label for="lang-en" class="language-option">
+                        <span class="flag">🇺🇸</span>
+                        <span>English</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-6">
+    <!-- Left Column: Upload and Job Input -->
+    <div class="col-lg-5">
+        <!-- CV Upload Section -->
+        <div class="premium-card mb-6">
+            <div class="premium-header">
+                <h3 class="mb-0"><i class="fas fa-cloud-upload-alt me-2"></i>Prześlij swoje CV</h3>
+            </div>
+            <div class="card-body p-6">
+                <form id="cv-upload-form" enctype="multipart/form-data">
+                    <div class="form-floating mb-4">
+                        <input type="file" class="form-control" id="cv-file" name="cv_file" accept=".pdf" required>
+                        <label for="cv-file">Wybierz plik CV (PDF)</label>
+                    </div>
+                    <div class="form-text mb-4">
+                        <i class="fas fa-shield-alt me-2 text-success"></i>
+                        Twoje CV jest przetwarzane bezpiecznie i nie jest przechowywane na stałe
+                    </div>
+                    <button type="submit" class="btn btn-premium w-100">
+                        <i class="fas fa-rocket me-2"></i>Prześlij CV
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Job Information Section -->
+        <div class="premium-card mb-6">
+            <div class="premium-header">
+                <h3 class="mb-0"><i class="fas fa-briefcase me-2"></i>Informacje o stanowisku</h3>
+            </div>
+            <div class="card-body p-6">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="job-title" placeholder="np. Senior Frontend Developer">
+                    <label for="job-title">Nazwa stanowiska</label>
+                </div>
+                
+                <div class="form-floating mb-4">
+                    <input type="url" class="form-control" id="job-url" placeholder="https://example.com/job">
+                    <label for="job-url">Link do oferty pracy (opcjonalnie)</label>
+                </div>
+                
+                <div class="form-floating mb-4">
+                    <textarea class="form-control" id="job-description" style="height: 150px" placeholder="Wklej opis stanowiska tutaj..."></textarea>
+                    <label for="job-description">Opis stanowiska</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Options -->
+        <div class="premium-card">
+            <div class="premium-header">
+                <h3 class="mb-0"><i class="fas fa-magic me-2"></i>Opcje optymalizacji AI</h3>
+            </div>
+            <div class="card-body p-6">
+                <div class="list-group list-group-flush">
+                    <label class="list-group-item d-flex gap-3 border-0 p-3 rounded-3 mb-2" style="background: rgba(79, 70, 229, 0.05);">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="optimize" value="optimize" checked>
+                        <span>
+                            <strong class="d-block">✨ Optymalizuj CV</strong>
+                            <small class="text-muted">Stwórz ulepszoną wersję dostosowaną do stanowiska</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-3 border-0 p-3 rounded-3 mb-2" style="background: rgba(124, 58, 237, 0.05);">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="feedback" value="feedback">
+                        <span>
+                            <strong class="d-block">📋 Feedback rekrutera</strong>
+                            <small class="text-muted">Otrzymaj szczegółową ocenę od AI jako rekruter</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-3 border-0 p-3 rounded-3 mb-2" style="background: rgba(6, 182, 212, 0.05);">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="cover_letter" value="cover_letter">
+                        <span>
+                            <strong class="d-block">📝 List motywacyjny</strong>
+                            <small class="text-muted">Wygeneruj spersonalizowany list motywacyjny</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-3 border-0 p-3 rounded-3 mb-2" style="background: rgba(5, 150, 105, 0.05);">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="ats_check" value="ats_check">
+                        <span>
+                            <strong class="d-block">🤖 Analiza ATS</strong>
+                            <small class="text-muted">Sprawdź kompatybilność z systemami rekrutacyjnymi</small>
+                        </span>
+                    </label>
+                    
+                    <label class="list-group-item d-flex gap-3 border-0 p-3 rounded-3 mb-2" style="background: rgba(217, 119, 6, 0.05);">
+                        <input class="form-check-input flex-shrink-0" type="radio" name="optimization-option" id="cv_score" value="cv_score">
+                        <span>
+                            <strong class="d-block">📊 Ocena CV</strong>
+                            <small class="text-muted">Otrzymaj szczegółową punktację i rekomendacje</small>
+                        </span>
+                    </label>
+                </div>
+                
+                <button id="process-cv-btn" class="btn btn-premium w-100 mt-4" disabled>
+                    <i class="fas fa-brain me-2"></i>Analizuj z AI
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Column: CV Text and Results -->
+    <div class="col-lg-7">
+        <!-- CV Text Section -->
+        <div class="premium-card mb-6">
+            <div class="card-header bg-transparent border-0 p-4">
+                <button class="btn btn-link text-decoration-none p-0 w-100 text-start fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#cv-text-section" aria-expanded="false">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0"><i class="fas fa-file-alt me-2"></i>Twój tekst CV</h3>
+                        <div class="d-flex align-items-center">
+                            <button id="edit-cv-btn" class="btn btn-outline-primary btn-sm me-2" disabled onclick="event.stopPropagation();">
+                                <i class="fas fa-edit me-1"></i>Edytuj
+                            </button>
+                            <i class="fas fa-chevron-down collapse-icon"></i>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="collapse" id="cv-text-section">
+                <div class="card-body p-6">
+                    <div id="cv-preview" class="text-muted text-center p-8">
+                        <i class="fas fa-file-upload fa-3x mb-3 text-muted"></i>
+                        <p>Prześlij CV, aby zobaczyć wyodrębniony tekst</p>
+                    </div>
+                    <div id="cv-editor" style="display: none;">
+                        <textarea class="form-control" id="cv-text-editor" rows="15" style="font-family: var(--font-mono);"></textarea>
+                        <div class="d-flex justify-content-end mt-3 gap-2">
+                            <button id="save-cv-btn" class="btn btn-success">
+                                <i class="fas fa-save me-1"></i>Zapisz
+                            </button>
+                            <button id="cancel-edit-btn" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-1"></i>Anuluj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google AdSense - Middle Section -->
+        <div class="text-center mb-6">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7717241332394444"
+                 data-ad-slot="2345678901"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Wyniki AI</h3>
+                <div class="d-flex gap-2">
+                    <button id="compare-versions-btn" class="btn btn-outline-primary btn-sm" disabled>
+                        <i class="fas fa-columns me-1"></i>Porównaj
+                    </button>
+                    <button id="copy-result-btn" class="btn btn-outline-success btn-sm" disabled>
+                        <i class="fas fa-copy me-1"></i>Kopiuj
+                    </button>
+                </div>
+            </div>
+            
+            <div id="result-container" class="text-center text-muted p-8">
+                <i class="fas fa-robot fa-3x mb-3"></i>
+                <p>Przetwórz swoje CV, aby zobaczyć wyniki analizy AI</p>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loading-state" style="display: none;" class="text-center p-8">
+                <div class="loading-shimmer rounded-3 mb-3" style="height: 20px; width: 60%; margin: 0 auto;"></div>
+                <div class="loading-shimmer rounded-3 mb-3" style="height: 20px; width: 80%; margin: 0 auto;"></div>
+                <div class="loading-shimmer rounded-3" style="height: 20px; width: 40%; margin: 0 auto;"></div>
+                <p class="mt-4 text-muted">
+                    <i class="fas fa-spinner fa-spin me-2"></i>
+                    Przetwarzanie z AI... To może potrwać do minuty
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom AdSense -->
+<div class="text-center my-6">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7717241332394444"
+         data-ad-slot="3456789012"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modern-premium.css') }}">
+<style>
+.stat-card {
+    background: rgba(255,255,255,0.8);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.stat-icon i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--gray-600);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+}
+
+.collapse-icon {
+    transition: transform 0.3s ease;
+}
+
+[aria-expanded="true"] .collapse-icon {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .premium-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+// Enhanced form validation and UX improvements
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-enable process button when CV is uploaded
+    const cvFileInput = document.getElementById('cv-file');
+    const processBtn = document.getElementById('process-cv-btn');
+    
+    cvFileInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+            processBtn.disabled = false;
+            processBtn.innerHTML = '<i class="fas fa-brain me-2"></i>Gotowe do analizy!';
+        }
+    });
+    
+    // Smooth animations for better UX
+    const cards = document.querySelectorAll('.premium-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('animate__animated', 'animate__fadeInUp');
+    });
+});
+</script>
+{% endblock %}
