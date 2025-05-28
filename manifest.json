@@ -1,6 +1,6 @@
 {
   "name": "CV Optimizer Pro",
-  "short_name": "CV Pro",
+  "short_name": "CV Pro", 
   "description": "Professional CV optimization tool with AI-powered analysis",
   "start_url": "/",
   "display": "standalone",
@@ -10,16 +10,13 @@
   "scope": "/",
   "lang": "pl",
   "categories": ["productivity", "business", "utilities"],
+  "id": "/",
+  "dir": "ltr",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "icons": [
     {
       "src": "/static/icons/icon-72x72.svg",
       "sizes": "72x72",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/static/icons/icon-96x96.svg",
-      "sizes": "96x96",
       "type": "image/svg+xml",
       "purpose": "maskable any"
     },
@@ -60,34 +57,21 @@
       "purpose": "maskable any"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/static/screenshots/desktop-1.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/static/screenshots/mobile-1.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ],
+
   "shortcuts": [
     {
       "name": "Upload CV",
       "short_name": "Upload",
       "description": "Upload and analyze your CV",
       "url": "/?action=upload",
-      "icons": [{ "src": "/static/icons/upload-96x96.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/static/icons/icon-96x96.svg", "sizes": "96x96" }]
     },
     {
-      "name": "Premium Dashboard",
+      "name": "Premium Dashboard", 
       "short_name": "Dashboard",
       "description": "Access premium features",
       "url": "/premium-dashboard",
-      "icons": [{ "src": "/static/icons/premium-96x96.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/static/icons/icon-96x96.svg", "sizes": "96x96" }]
     }
   ],
   "prefer_related_applications": false
